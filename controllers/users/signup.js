@@ -60,7 +60,7 @@ export default async function signup(req, res) {
   }
 
   // Create the token.
-  const { id, email } = user;
+  const { id } = user;
   const JWT_SECRET = process.env.JWT_SECRET || 'nB4,Cx$*~a';
   const token = jwt.sign({ email }, JWT_SECRET);
 
