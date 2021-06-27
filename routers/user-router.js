@@ -11,8 +11,8 @@ import confirm from '../controllers/users/confirm';
 
 const userRouter = Router();
 
-userRouter.post('/signup', signup);
-userRouter.post('/login', login);
+userRouter.post('/sign-up', signup);
+userRouter.post('/sign-in', login);
 userRouter.post('/confirm/:token', confirm);
 userRouter.post('/reinitialize-password', sendReinitializationEmail);
 userRouter.get('/', authenticate, profile);

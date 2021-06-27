@@ -17,29 +17,29 @@ import Board from './views/Board';
 import SubmitBook from './views/SubmitBook';
 
 export default function Router() {
-  return (
-    <Switch>
-      <PublicRoute exact path='/' component={Index} />
-      <Route exact path='/search' component={Search} />
-      <PublicRoute exact path='/auth/signup' component={Signup} />
-      <PublicRoute exact path='/auth/login' component={Login} />
-      <Route exact path='/auth/confirm/:token' component={Confirm} />
-      <PublicRoute
-        exact
-        path='/auth/reinitialize-password'
-        component={ForgotPassword}
-      />
-      <PublicRoute
-        exact
-        path='/auth/reinitialize-password/:token'
-        component={Reinitialize}
-      />
-      <PrivateRoute exact path='/settings' component={Settings} />
-      <PrivateRoute exact path='/board' component={Board} />
-      <PrivateRoute exact path='/submit-book' component={SubmitBook} />
-      <Route exact path='/book/:id' component={Book} />
+	return (
+		<Switch>
+			<Route exact path='/' component={Index} />
+			<Route exact path='/search' component={Search} />
+			<PublicRoute exact path='/auth/signup' component={Signup} />
+			<PublicRoute exact path='/auth/login' component={Login} />
+			<Route exact path='/auth/confirm/:token' component={Confirm} />
+			<PublicRoute
+				exact
+				path='/auth/reinitialize-password'
+				component={ForgotPassword}
+			/>
+			<PublicRoute
+				exact
+				path='/auth/reinitialize-password/:token'
+				component={Reinitialize}
+			/>
+			<PrivateRoute exact path='/settings' component={Settings} />
+			<PrivateRoute exact path='/board' component={Board} />
+			<PrivateRoute exact path='/submit-book' component={SubmitBook} />
+			<Route exact path='/book/:id' component={Book} />
 
-      <Route component={NotFound} />
-    </Switch>
-  );
+			<Route component={NotFound} />
+		</Switch>
+	);
 }
