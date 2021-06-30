@@ -9,150 +9,149 @@ import StarRating from '../components/StarRating';
 import Ratings from '../components/Ratings';
 
 export default class Book extends Component {
-  static contextType = AuthContext;
+	static contextType = AuthContext;
 
-  state = {
-    book: {
-      title: '',
-      publicationDate: 0,
-      author: [],
-      genres: [],
-    },
-    ratings: [],
-    inReadList: false,
-    inReadingList: false,
-    inToReadList: false,
-    stars: false,
-    score: 0,
-    error: '',
-  };
+	state = {
+		book: {
+			title: '',
+			publicationDate: 0,
+			author: [],
+			genres: [],
+		},
+		ratings: [],
+		inReadList: false,
+		inReadingList: false,
+		inToReadList: false,
+		stars: false,
+		score: 0,
+		error: '',
+	};
 
-  async componentDidMount() {
-    const { id } = this.props.match.params;
-    const data = await getBook(id, this.context.token);
-    this.setState(data);
-  }
+	async componentDidMount() {
+		await this.getData();
+	}
 
-  updateRatings = (newRatings) => {
-    this.setState({ ratings: newRatings });
-  };
+	getData = async () => {
+		const { id } = this.props.match.params;
+		const data = await getBook(id, this.context.token);
+		this.setState(data);
+	};
 
-  toggleShowMore = () => {
-    const { doesShowMore } = this.state;
-    this.setState({ doesShowMore: !doesShowMore });
-  };
+	updateRatings = (newRatings) => {
+		this.setState({ ratings: newRatings });
+	};
 
-  handleShelfClick = async (shelf) => {
-    const { id } = this.props.match.params;
+	toggleShowMore = () => {
+		const { doesShowMore } = this.state;
+		this.setState({ doesShowMore: !doesShowMore });
+	};
 
-    const res = await addBookToShelf(this.context.token, id, shelf);
+	handleShelfClick = async (shelf) => {
+		const { id } = this.props.match.params;
 
-    const { error } = res;
-    if (error) {
-      this.setState({ error });
-      return;
-    }
+		const res = await addBookToShelf(this.context.token, id, shelf);
 
-    this.setState({
-      inReadList: shelf === 'booksRead',
-      inReadingList: shelf === 'booksReading',
-      inToReadList: shelf === 'booksToRead',
-    });
-  };
+		const { error } = res;
+		if (error) {
+			this.setState({ error });
+			return;
+		}
 
-  setScore = (newScore) => {
-    const { book } = this.state;
-    book.score = newScore;
-    this.setState({ book });
-  };
+		this.setState({
+			inReadList: shelf === 'booksRead',
+			inReadingList: shelf === 'booksReading',
+			inToReadList: shelf === 'booksToRead',
+		});
+	};
 
-  render() {
-    const { id } = this.props.match.params;
-    const { token } = this.context;
+	setScore = (newScore) => {
+		const { book } = this.state;
+		book.score = newScore;
+		this.setState({ book });
+	};
 
-    const { title, author, publicationDate, score, error } = this.state.book;
-    const {
-      inReadList,
-      inReadingList,
-      inToReadList,
-      ratings,
-      stars,
-    } = this.state;
+	render() {
+		const { id } = this.props.match.params;
+		const { token } = this.context;
 
-    if (error === 'Book not found.') {
-      return <NotFound />;
-    }
+		const { title, author, publicationDate, score, error } = this.state.book;
+		const { inReadList, inReadingList, inToReadList, ratings, stars } =
+			this.state;
 
-    if (!title) {
-      return <div></div>;
-    }
+		if (error === 'Book not found.') {
+			return <NotFound />;
+		}
 
-    return (
-      <div className='section container'>
-        <h1 className='title'>
-          {title} ({publicationDate})
-        </h1>
-        <h2 className='subtitle' style={{ marginBottom: '8px' }}>
-          {author}
-        </h2>
+		if (!title) {
+			return <div></div>;
+		}
 
-        {token && (
-          <div className='field has-addons'>
-            <p className='control'>
-              <button
-                className='button is-success'
-                onClick={() => this.handleShelfClick('booksRead')}
-              >
-                <span className='icon is-small'>
-                  {inReadList && <FaCheck />}
-                  {!inReadList && <FaMinus />}
-                </span>
-                <span>Déjà lu</span>
-              </button>
-            </p>
-            <p className='control'>
-              <button
-                className='button is-info'
-                onClick={() => this.handleShelfClick('booksReading')}
-              >
-                <span className='icon is-small'>
-                  {inReadingList && <FaCheck />}
-                  {!inReadingList && <FaMinus />}
-                </span>
-                <span>En train de lire</span>
-              </button>
-            </p>
-            <p className='control'>
-              <button
-                className='button is-primary'
-                onClick={() => this.handleShelfClick('booksToRead')}
-              >
-                <span className='icon is-small'>
-                  {inToReadList && <FaCheck />}
-                  {!inToReadList && <FaMinus />}
-                </span>
-                <span>À lire</span>
-              </button>
-            </p>
-          </div>
-        )}
+		return (
+			<div className='section container'>
+				<h1 className='title'>
+					{title} ({publicationDate})
+				</h1>
+				<h2 className='subtitle' style={{ marginBottom: '8px' }}>
+					{author}
+				</h2>
 
-        <StarRating
-          stars={token ? stars : Math.round(score)}
-          token={token}
-          id={id}
-          score={score}
-          setScore={this.setScore}
-        />
+				{token && (
+					<div className='field has-addons'>
+						<p className='control'>
+							<button
+								className='button is-success'
+								onClick={() => this.handleShelfClick('booksRead')}
+							>
+								<span className='icon is-small'>
+									{inReadList && <FaCheck />}
+									{!inReadList && <FaMinus />}
+								</span>
+								<span>Déjà lu</span>
+							</button>
+						</p>
+						<p className='control'>
+							<button
+								className='button is-info'
+								onClick={() => this.handleShelfClick('booksReading')}
+							>
+								<span className='icon is-small'>
+									{inReadingList && <FaCheck />}
+									{!inReadingList && <FaMinus />}
+								</span>
+								<span>En train de lire</span>
+							</button>
+						</p>
+						<p className='control'>
+							<button
+								className='button is-primary'
+								onClick={() => this.handleShelfClick('booksToRead')}
+							>
+								<span className='icon is-small'>
+									{inToReadList && <FaCheck />}
+									{!inToReadList && <FaMinus />}
+								</span>
+								<span>À lire</span>
+							</button>
+						</p>
+					</div>
+				)}
 
-        <Ratings
-          stars={stars}
-          bookID={id}
-          ratings={ratings}
-          token={token}
-          updateRatings={this.updateRatings}
-        />
-      </div>
-    );
-  }
+				<StarRating
+					stars={token ? stars : Math.round(score)}
+					token={token}
+					id={id}
+					score={score}
+					setScore={this.setScore}
+				/>
+
+				<Ratings
+					stars={stars}
+					bookID={id}
+					ratings={ratings}
+					token={token}
+					updateRatings={this.updateRatings}
+				/>
+			</div>
+		);
+	}
 }

@@ -6,11 +6,14 @@ $info: #69779b;
 $danger: #df7861;
 $success: #70af85;
 
-@import '../node_modules/bulma/bulma.sass';
+$footer-padding: 3rem 1.5rem;
 
+@import '~bulma/bulma.sass';
+
+.is-fullheight,
 .hero.is-fullheight {
-  min-height: calc(90vh - #{$navbar-height});
-  margin-top: 15px;
+	min-height: calc(90vh - #{$navbar-height} - 3rem);
+	margin-top: 15px;
 }
 
 .pointer,
@@ -18,64 +21,64 @@ $success: #70af85;
 .pagination-previous,
 .pagination-next,
 .pagination-link {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .genres {
-  box-shadow: 10px 0 10px -5px #f9f9f9;
-  min-height: calc(90vh - #{$navbar-height});
+	box-shadow: 10px 0 10px -5px #f9f9f9;
+	min-height: calc(90vh - #{$navbar-height});
 }
 
 .genre {
-  color: black;
-  margin: 13px 30px 13px 30px;
+	color: black;
+	margin: 13px 30px 13px 30px;
 }
 
 .genre:first-of-type:hover {
-  color: black;
+	color: black;
 }
 
 .genre p {
-  width: 60%;
-  margin: 0 auto;
+	width: 60%;
+	margin: 0 auto;
 }
 
 .column {
-  padding-left: 0px;
-  padding-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .container {
-  max-width: 90%;
+	max-width: 90%;
 }
 
 .container.is-vcentered {
-  margin-top: 20vh;
+	margin-top: 20vh;
 }
 
 .genre.is-active,
 .genre:hover {
-  color: $info;
+	color: $info;
 }
 
 .main {
-  min-height: 86vh;
+	min-height: 86vh;
 }
 
 .books-search {
-  margin: 0 auto;
-  max-width: 70%;
+	margin: 0 auto;
+	max-width: 70%;
 }
 @media screen and (min-width: 500px) {
-  .book-card {
-    max-height: 75px;
-  }
+	.book-card {
+		max-height: 75px;
+	}
 }
 
 .pagination {
-  margin-top: 18px;
+	margin-top: 18px;
 }
 
 .navbar {
-  border-bottom: solid 0.5px rgb(243, 241, 241);
+	border-bottom: solid 0.5px rgb(243, 241, 241);
 }

@@ -1,4 +1,4 @@
-const DOMAIN_NAME = 'http://localhost:5000';
+const DOMAIN_NAME = 'https://bonlivre.fr';
 
 function getHeaders(token = '') {
 	const headers = new Headers();
