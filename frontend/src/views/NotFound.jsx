@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 export default function NotFound() {
   return (
-    <div className='container'>
-      <h1 className='title'>Page not found.</h1>
+    <div className='section container is-fullheight'>
+      <h1 className='title'>Page non trouvée</h1>
     </div>
-  );
+  )
 }

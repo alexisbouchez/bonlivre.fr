@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+import dotenv from 'dotenv'
+import nodemailer from 'nodemailer'
 
-dotenv.config();
+dotenv.config()
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
@@ -9,15 +9,15 @@ const transporter = nodemailer.createTransport({
   secure: Number(process.env.EMAIL_PORT) === 465,
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+    pass: process.env.EMAIL_PASS
+  }
+})
 
 export default function mailer(to, subject, html) {
   transporter.sendMail({
     from: `"${process.env.APP_NAME}" ${process.env.EMAIL_USER}`,
     to,
     subject,
-    html,
-  });
+    html
+  })
 }

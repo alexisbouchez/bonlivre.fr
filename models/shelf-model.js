@@ -1,31 +1,31 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose'
 
 const shelfSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   booksRead: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Book',
-    },
+      ref: 'Book'
+    }
   ],
   booksReading: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Book',
-    },
+      ref: 'Book'
+    }
   ],
   booksToRead: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Book',
-    },
-  ],
-});
+      ref: 'Book'
+    }
+  ]
+})
 
-const Shelf = model('Shelf', shelfSchema);
+const Shelf = model('Shelf', shelfSchema)
 
-export default Shelf;
+export default Shelf

@@ -1,11 +1,11 @@
-import { config } from 'dotenv';
-import { connect } from 'mongoose';
+import { config } from 'dotenv'
+import { connect } from 'mongoose'
 
-config();
+config()
 
-const mongoUri = process.env.MONGO_URI || 'mongodb://localhost/bonlivre';
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost/bonlivre'
 
 connect(mongoUri, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})

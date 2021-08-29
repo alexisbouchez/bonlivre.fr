@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { confirm } from '../../API';
+import { confirm } from '../../API'
 
 export default class Confirm extends Component {
   state = {
     isConfirmed: false,
-    error: '',
-  };
+    error: ''
+  }
 
   async componentDidMount() {
-    const { token } = this.props.match.params;
+    const { token } = this.props.match.params
 
-    const res = await confirm(token);
-    const { error } = res;
+    const res = await confirm(token)
+    const { error } = res
 
     if (error) {
-      this.setState({ error });
-      return;
+      this.setState({ error })
+      return
     }
 
-    this.setState({ isConfirmed: true });
+    this.setState({ isConfirmed: true })
   }
 
   render() {
-    const { isConfirmed, error } = this.state;
+    const { isConfirmed, error } = this.state
 
     return (
-      <section className={error ? 'hero is-danger' : 'hero is-success'}>
-        <div className='hero-body'>
-          <div className='container'>
-            {isConfirmed && (
-              <h2 className='subtitle'>
-                Votre adresse électronique est confirmée.
-              </h2>
-            )}
-            {error && <h2 className='subtitle'>{error}</h2>}
+      <div className='is-fullheight'>
+        <section className={`hero is-${error ? 'danger' : 'success'}`}>
+          <div className='hero-body'>
+            <div className='container'>
+              {isConfirmed && (
+                <h2 className='subtitle'>
+                  Votre adresse électronique est confirmée.
+                </h2>
+              )}
+              {error && <h2 className='subtitle'>{error}</h2>}
+            </div>
           </div>
-        </div>
-      </section>
-    );
+        </section>
+      </div>
+    )
   }
 }

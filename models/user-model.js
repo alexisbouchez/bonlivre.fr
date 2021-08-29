@@ -1,50 +1,50 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose'
 
 const fields = {
   username: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   newEmail: String,
   password: {
     type: String,
-    required: true,
+    required: true
   },
   isConfirmed: {
     type: Boolean,
-    default: false,
+    default: false
   },
   alreadyReadList: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Book',
-    },
+      ref: 'Book'
+    }
   ],
   currentlyReadingList: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Book',
-    },
+      ref: 'Book'
+    }
   ],
   readingList: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Book',
-    },
-  ],
-};
+      ref: 'Book'
+    }
+  ]
+}
 
 const options = {
   createdAt: 'created_at',
-  updatedAt: 'updated_at',
-};
+  updatedAt: 'updated_at'
+}
 
-const userSchema = Schema(fields, options);
+const userSchema = Schema(fields, options)
 
-const User = model('User', userSchema);
+const User = model('User', userSchema)
 
-export default User;
+export default User

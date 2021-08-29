@@ -1,28 +1,28 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose'
 
 const bookSchema = Schema({
   title: {
     type: String,
-    required: true,
+    required: true
   },
   author: {
     type: String,
-    required: true,
+    required: true
   },
   publicationDate: {
     type: Number,
-    required: true,
+    required: true
   },
   score: {
     type: Number,
-    default: 0,
+    default: 0
   },
   genres: {
     type: [String],
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const Book = model('Book', bookSchema);
+const Book = model('Book', bookSchema)
 
-export default Book;
+export default Book

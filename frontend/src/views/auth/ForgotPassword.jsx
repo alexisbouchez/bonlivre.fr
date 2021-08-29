@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
-import { FaEnvelope } from 'react-icons/fa';
-import { isEmail } from 'validator';
+import React, { Component } from 'react'
+import { FaEnvelope } from 'react-icons/fa'
+import { isEmail } from 'validator'
 
-import { sendReinitializationEmail } from '../../API';
+import { sendReinitializationEmail } from '../../API'
 
 export default class ForgotPassword extends Component {
   state = {
     email: '',
     error: '',
-    isEmailSent: false,
-  };
+    isEmailSent: false
+  }
 
   handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     this.setState({
-      [name]: value,
-    });
-  };
+      [name]: value
+    })
+  }
 
   handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { email } = this.state;
+    const { email } = this.state
     if (!isEmail(email)) {
-      this.setState({ error: 'Adresse électronique invalide.' });
-      return;
+      this.setState({ error: 'Adresse électronique invalide.' })
+      return
     }
 
-    const res = await sendReinitializationEmail(email);
-    const { error } = res;
+    const res = await sendReinitializationEmail(email)
+    const { error } = res
     if (error) {
-      this.setState({ error: 'Adresse électronique invalide.' });
-      return;
+      this.setState({ error: 'Adresse électronique invalide.' })
+      return
     }
 
-    this.setState({ isEmailSent: true });
-  };
+    this.setState({ isEmailSent: true })
+  }
 
   render() {
     if (this.state.isEmailSent) {
@@ -50,11 +50,14 @@ export default class ForgotPassword extends Component {
             </div>
           </div>
         </section>
-      );
+      )
     }
 
     return (
-      <form onSubmit={this.handleSubmit} className='section container'>
+      <form
+        onSubmit={this.handleSubmit}
+        className='section container is-fullheight'
+      >
         <h1 className='title'>Mot de passe oublié</h1>
         <div className='field'>
           <label className='label' htmlFor='email'>
@@ -82,6 +85,6 @@ export default class ForgotPassword extends Component {
           <input className='button is-link' type='submit' />
         </div>
       </form>
-    );
+    )
   }
 }

@@ -1,22 +1,22 @@
-import { Router } from 'express';
+import { Router } from 'express'
 
-import signup from '../controllers/users/signup';
-import login from '../controllers/users/login';
-import authenticate from '../middleware/authenticate';
-import profile from '../controllers/users/profile';
-import update from '../controllers/users/update';
-import remove from '../controllers/users/remove';
-import sendReinitializationEmail from '../controllers/users/reinitialize-password';
-import confirm from '../controllers/users/confirm';
+import signup from '../controllers/users/signup'
+import login from '../controllers/users/login'
+import authenticate from '../middleware/authenticate'
+import profile from '../controllers/users/profile'
+import update from '../controllers/users/update'
+import remove from '../controllers/users/remove'
+import sendReinitializationEmail from '../controllers/users/reinitialize-password'
+import confirm from '../controllers/users/confirm'
 
-const userRouter = Router();
+const userRouter = Router()
 
-userRouter.post('/sign-up', signup);
-userRouter.post('/sign-in', login);
-userRouter.post('/confirm/:token', confirm);
-userRouter.post('/reinitialize-password', sendReinitializationEmail);
-userRouter.get('/', authenticate, profile);
-userRouter.put('/', authenticate, update);
-userRouter.delete('/', authenticate, remove);
+userRouter.post('/sign-up', signup)
+userRouter.post('/sign-in', login)
+userRouter.post('/confirm/:token', confirm)
+userRouter.post('/reinitialize-password', sendReinitializationEmail)
+userRouter.get('/', authenticate, profile)
+userRouter.put('/', authenticate, update)
+userRouter.delete('/', authenticate, remove)
 
-export default userRouter;
+export default userRouter

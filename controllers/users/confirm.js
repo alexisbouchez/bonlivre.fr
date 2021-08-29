@@ -1,39 +1,39 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
 
-import User from '../../models/user-model';
+import User from '../../models/user-model'
 
-dotenv.config();
+dotenv.config()
 
 export default async function confirm(req, res) {
-  const { token } = req.params;
+  const { token } = req.params
 
-  const JWT_SECRET = process.env.JWT_SECRET || 'nB4,Cx$*~a';
-  let email;
+  const JWT_SECRET = process.env.JWT_SECRET || 'nB4,Cx$*~a'
+  let email
   try {
-    email = jwt.verify(token, JWT_SECRET).email;
+    email = jwt.verify(token, JWT_SECRET).email
   } catch (err) {
-    return res.status(400).json({ error: 'Unauthorized.' });
+    return res.status(400).json({ error: 'Unauthorized.' })
   }
 
-  let user;
+  let user
   try {
-    user = await User.findOne({ email });
+    user = await User.findOne({ email })
   } catch (err) {
-    return res.status(400).json({ error: 'Unauthorized.' });
+    return res.status(400).json({ error: 'Unauthorized.' })
   }
 
   if (!user) {
-    return res.status(400).json({ error: 'Unauthorized.' });
+    return res.status(400).json({ error: 'Unauthorized.' })
   }
 
   if (user.isConfirmed && user.newEmail) {
-    user.email = user.newEmail;
-    user.newEmail = '';
+    user.email = user.newEmail
+    user.newEmail = ''
   }
 
-  user.isConfirmed = true;
-  await user.save();
+  user.isConfirmed = true
+  await user.save()
 
-  return res.json({ message: 'Account confirmed. ' });
+  return res.json({ message: 'Account confirmed. ' })
 }
